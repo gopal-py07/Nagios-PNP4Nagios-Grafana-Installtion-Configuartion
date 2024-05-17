@@ -137,6 +137,20 @@ sudo mv /usr/local/pnp4nagios/share/install.php /usr/local/pnp4nagios/share/old_
 Installation of Graffana-Server:
 	Open terminal and Create file : sudo vi grafana-install.sh
 	Update file as per below
+sudo apt-get update
+sudo apt-get install -y apt-transport-https
+sudo apt-get install -y software-properties-common wget
+sudo wget -q -O /usr/share/keyrings/grafana.key https://apt.grafana.com/gpg.key
+echo "deb [signed-by=/usr/share/keyrings/grafana.key] https://apt.grafana.com stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
+sudo apt-get update
+sudo apt-get install grafana
+grafana-server -v
+sudo service start grafana-server
+sudo service enable grafana-server
+sudo service status grafana-server
+sudo service grafana-server start
+sudo ufw allow 3000/tcp
+
 	
 Use click on esc then : (colon)  then wq!
 Make file executable : sudo chmod 777 grafana-install.sh
