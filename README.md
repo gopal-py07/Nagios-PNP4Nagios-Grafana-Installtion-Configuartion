@@ -16,7 +16,7 @@ These are compiled executables or scripts (Perl scripts, shell scripts, etc.) th
 Installation:
 Installing Nagios core on ubuntu sever locally  
 Open terminal and create file sudo vi nagios-install.sh and update below command in the file
-	
+
 sudo apt update && sudo apt upgrade
 sudo apt install -y wget build-essential apache2 php openssl perl make php-gd libgd-dev libapache2-mod-php libperl-dev libssl-dev daemon autoconf libc6-dev libmcrypt-dev libssl-dev libnet-snmp-perl gettext unzip
 cd /tmp
@@ -135,8 +135,8 @@ sudo mv /usr/local/pnp4nagios/share/install.php /usr/local/pnp4nagios/share/old_
 
 
 Installation of Graffana-Server:
-	Open terminal and Create file : sudo vi grafana-install.sh
-	Update file as per below
+Open terminal and Create file : sudo vi grafana-install.sh
+Update file as per below
 sudo apt-get update
 sudo apt-get install -y apt-transport-https
 sudo apt-get install -y software-properties-common wget
@@ -151,7 +151,7 @@ sudo service status grafana-server
 sudo service grafana-server start
 sudo ufw allow 3000/tcp
 
-	
+
 Use click on esc then : (colon)  then wq!
 Make file executable : sudo chmod 777 grafana-install.sh
 Run file: sudo ./ grafana-install.sh
@@ -167,7 +167,7 @@ sudo service nagios start
 
 
 sudo service apache2 restart 
- sudo service nagios restart
- sudo service npcd restart
+sudo service nagios restart
+sudo service npcd restart
 
 woeking on documentation part
