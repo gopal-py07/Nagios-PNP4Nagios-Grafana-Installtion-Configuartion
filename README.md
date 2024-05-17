@@ -17,6 +17,38 @@ Installation:
 Installing Nagios core on ubuntu sever locally  
 Open terminal and create file sudo vi nagios-install.sh and update below command in the file
 	
+sudo apt update && sudo apt upgrade
+sudo apt install -y wget build-essential apache2 php openssl perl make php-gd libgd-dev libapache2-mod-php libperl-dev libssl-dev daemon autoconf libc6-dev libmcrypt-dev libssl-dev libnet-snmp-perl gettext unzip
+cd /tmp
+wget https://assets.nagios.com/downloads/nagioscore/releases/nagios-4.4.6.tar.gz
+sudo useradd nagios
+sudo groupadd nagcmd
+sudo usermod -a -G nagcmd nagioo
+tar -xzf nagios-4.4.6.tar.gz
+cd nagios-4.4.6
+sudo ./configure --with-httpd-conf=/etc/apache2/sites-enabled
+sudo make all
+sudo make install
+sudo make install-init
+sudo make install-commandmode
+sudo make install-config
+sudo /usr/bin/install -c -m 644 sample-config/httpd.conf /etc/apache2/sites-enabled/nagios.conf
+sudo a2enmod rewrite
+sudo a2enmod cgi
+sudo systemctl restart apache2
+cd /tmp
+wget https://nagios-plugins.org/download/nagios-plugins-2.3.3.tar.gz
+tar -xzf nagios-plugins-2.3.3.tar.gz
+cd nagios-plugins-2.3.3
+sudo ./configure --with-nagios-user=nagios --with-nagios-group=nagios --with-openssl
+sudo make
+sudo make install
+sudo /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+sudo systemctl enable --now nagios.service
+sudo systemctl restart apache2.service
+sudo htpasswd -c /usr/local/nagios/etc/htpasswd.users nagiosadmin
+sudo nano /etc/apache2/sites-enabled/nagios.conf
+
 
 Next, Give executable permission to file, sudo chmod 777 nagios-install.sh
 Run the command, Sudo ./ nagios-install.sh 
@@ -43,6 +75,26 @@ Installation of pnp4nagios:
 Open terminal and create file such as , 
 sudo vi pnp4nagios-install.sh and update fileas per below commands
 
+sudo apt-get update
+sudo apt-get install -y rrdtool librrd-simple-perl php-gd php-xml
+cd /tmp
+sudo wget -O pnp4nagios.tar.gz https://github.com/lingej/pnp4nagios/archive/0.6.26.tar.gz
+sudo tar xzf pnp4nagios.tar.gz
+cd pnp4nagios-0.6.26
+sudo ./configure --with-httpd-conf=/etc/apache2/sites-enabled
+sudo make all
+sudo make install
+sudo make install-webconf
+sudo make install-config
+sudo make install-init
+# Reload systemd to pick up any changes to unit files
+sudo systemctl daemon-reload
+
+# Enable the npcd.service to start on boot using service
+sudo service npcd enable
+
+# Start the npcd.service immediately using service
+sudo service npcd start
 
 
 
