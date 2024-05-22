@@ -1,3 +1,9 @@
+use link to follow tutalrial and get your jo done
+
+https://medium.com/@gopalghule05/monitoring-any-local-server-with-nagios-pnp4nagios-grafana-instaltion-and-configuration-on-ubantu-1b1fce8cfcd5
+
+
+
 # Nagios-PNP4Nagios-Grafana-Installtion-Configuartion
 Monitoring Server with Nagios , PNP4Nagios and Grafana
 
